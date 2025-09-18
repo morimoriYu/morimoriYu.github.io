@@ -1,18 +1,3 @@
-$(function(){
-        const hash = decodeURI(location.hash);
-        if(hash){
-            $("html, body").animate({scrollTop:$(hash).offset().top});
-            window.history.replaceState(null, '', window.location.pathname + window.location.search);
-        }
-        $('a[href^="#"]').click(function(){
-            const href= $(this).attr("href");
-            const target = $(href == "#" || href == "" ? 'html' : href);
-            $("html, body").animate({scrollTop:target.offset().top});
-            window.history.replaceState(null, '', window.location.pathname + window.location.search);
-            return false;
-        });
-    });
-  
 const toggler = document.querySelector(".toggle");
 
 window.addEventListener("click", event => {
