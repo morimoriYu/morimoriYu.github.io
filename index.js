@@ -1,20 +1,18 @@
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('a.scroll-link').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault(); // 通常のジャンプを止める
-
-      // 対象要素を取得
-      const target = document.querySelector(this.getAttribute('href'));
-
-      // スムーズにスクロール
-      target.scrollIntoView({ behavior: 'smooth' });
-
-      // URLのハッシュを残さない → 更新しても勝手に飛ばない
-      history.replaceState(null, null, location.pathname + location.search);
+$(function(){
+        const hash = decodeURI(location.hash);
+        if(hash){
+            $("html, body").animate({scrollTop:$(hash).offset().top});
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+        $('a[href^="#"]').click(function(){
+            const href= $(this).attr("href");
+            const target = $(href == "#" || href == "" ? 'html' : href);
+            $("html, body").animate({scrollTop:target.offset().top});
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+            return false;
+        });
     });
-  });
-});
-
+  
 const toggler = document.querySelector(".toggle");
 
 window.addEventListener("click", event => {
